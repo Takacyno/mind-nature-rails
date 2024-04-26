@@ -1,0 +1,26 @@
+<h1>カウンセラー一覧</h1>
+<% if current_user.adminflag? %>
+    <%= link_to "戻る", frontCover_admin_path(@user), class: 'btn btn-primary' %>
+<% end %>
+<%= link_to '新規登録', new_counsellor_path, class: 'btn btn-primary' %>
+<table class="table table-hover">
+    <thead class="thead-default">
+        <tr>
+            <th><%= User.human_attribute_name(:name) %></th>
+            <% if current_user.adminflag %>
+            <th><%= User.human_attribute_name(:hospital) %></th>
+            <% end %>
+        </tr>
+    </thead>
+    <tbody>
+        <% @counsellors.each do |counsellor| %>
+            <tr>
+                <td><%= link_to counsellor.user.name, counsellor_path(counsellor) %></td>
+                <% if current_user.adminflag %>
+                    <td><%= I18n.t("hospital.#{counsellor.hospital}") %></td>    
+                <% end %>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+

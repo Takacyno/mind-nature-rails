@@ -1,0 +1,13 @@
+<%= user_fields.fields_for @user do |user_fields| %>
+  <div class:"form-group">
+    <%= user_fields.label :name, User.human_attribute_name(:name), class: "form-control",style: "display: block" %>
+    <%= user_fields.text_field :name %>
+  </div>
+
+  <div>
+    <%= user_fields.label :email, User.human_attribute_name(:email), style: "display: block" %>
+    <%= user_fields.text_field :email %>
+  </div>
+  
+ <% end %>  
+

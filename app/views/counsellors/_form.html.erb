@@ -1,0 +1,57 @@
+
+  <% if @counsellor.user.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@counsellor.user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+        <% @counsellor.user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class:"form-group">
+    <%= form.label :name, User.human_attribute_name(:name) %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class:"form-group">
+    <%= form.label :email, User.human_attribute_name(:email) %>
+    <%= form.text_field :email, class: "form-control" %>
+  </div>
+  <% if current_user.directorflag? %>
+    <% if calling_view=='edit' %>
+      <div class:"form-group">
+        <%= form.label :userstatus, User.human_attribute_name(:userstatus) %>
+        <%= form.select(:userstatus, I18n.t('userstatus').map { |key, value| [value, key] }, {selected: @counsellor.user.userstatus} ) %>
+      </div>
+    <% end %>
+    <div class:"form-check">
+      <%= form.label :directorflag, User.human_attribute_name(:directorflag), class: "form-check-label" %>
+      <%= form.check_box(:directorflag,class:"form-check-input") %>
+    </div>
+
+  <% end %>
+  <% if calling_view=='new' %>
+    <div class:"form-group">
+      <%= form.label :password, User.human_attribute_name(:password) %>
+      <%= form.password_field :password , class: "form-control"%>
+    </div>
+    <div class:"form-group">
+      <%= form.label :password_confirmation, User.human_attribute_name(:password_confirmation) %>
+      <%= form.password_field :password_confirmation , class: "form-control"%>
+    </div>
+  <% end %>
+  <%= form.fields_for :counsellor do |counsellor_fields| %>
+    <% if current_user.adminflag? %>
+      <div class:"form-group">
+        <%= counsellor_fields.label :hospital, Counsellor.human_attribute_name(:hospital) %>
+        <%= counsellor_fields.select(:hospital, I18n.t('hospital').map { |key, value| [value, key] }, selected: @counsellor.hospital) %>
+      </div>
+    <% end %>
+  <% end %>  
+
+
+  <%= form.submit class: "btn btn-primary" %>
+
+
+

@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>カウンセラー一覧</h1>
+<%= link_to '新規登録' , admin_counsellors_new_path,class: 'btn btn-primary' %>
+
+<div id="users" class="mb-3">
+  <% @counsellors.each do |counsellor| %>
+    <%= render counsellor %>
+    <p>
+      <%= link_to "Show this counsellor", counsellor %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New user", admin_counsellors_new_path %>

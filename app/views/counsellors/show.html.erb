@@ -1,0 +1,9 @@
+<%= render 'patients/user',user: @counsellor.user %>
+<p>
+<strong><%= I18n.t("roll") %>:</strong>
+<%= I18n.t("counsellor") %>
+</p>
+<div>
+  <%= link_to "編集", edit_counsellor_path(@counsellor), class: 'btn btn-primary' %>
+  <%= link_to "戻る", frontCover_counsellor_path(@counsellor), class: 'btn btn-primary' %>
+</div>

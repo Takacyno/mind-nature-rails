@@ -1,0 +1,8 @@
+<p style="color: green"><%= notice %></p>
+<%= render 'user',user: @patient.user %>
+<%= render 'patient',patient: @patient %>
+<div>
+  <%= link_to "編集", edit_patient_path(@patient), class: 'btn btn-primary' %>
+  <%=" " %>
+  <%= link_to "戻る", frontCover_patient_path(@patient), class: 'btn btn-primary' %>
+</div>

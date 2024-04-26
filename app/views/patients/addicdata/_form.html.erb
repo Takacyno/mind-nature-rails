@@ -1,0 +1,84 @@
+<%= form_with(model: addicdatum, url: new_patient_addicdatum_path(@patient)) do |form| %>
+  <% if addicdatum.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(addicdatum.errors.count, "error") %> prohibited this addicdatum from being saved:</h2>
+
+      <ul>
+        <% addicdatum.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div>
+    <%= form.label :severity, style: "display: block" %>
+    <%= form.number_field :severity %>
+  </div>
+
+  <div>
+    <%= form.label :progress, style: "display: block" %>
+    <%= form.text_field :progress %>
+  </div>
+
+  <div>
+    <%= form.label :difficulties, style: "display: block" %>
+    <%= form.text_field :difficulties %>
+  </div>
+
+  <div>
+    <%= form.label :frequency, style: "display: block" %>
+    <%= form.text_field :frequency %>
+  </div>
+
+  <div>
+    <%= form.label :trouble, style: "display: block" %>
+    <%= form.text_field :trouble %>
+  </div>
+
+  <div>
+    <%= form.label :method, style: "display: block" %>
+    <%= form.text_field :method %>
+  </div>
+
+  <div>
+    <%= form.label :goal, style: "display: block" %>
+    <%= form.text_field :goal %>
+  </div>
+
+  <div>
+    <%= form.label :controlstimulustext, style: "display: block" %>
+    <%= form.text_field :controlstimulustext %>
+  </div>
+
+  <div>
+    <%= form.label :controlstimulusinstruction, style: "display: block" %>
+    <%= form.text_area :controlstimulusinstruction %>
+  </div>
+
+  <div>
+    <%= form.label :pseudoactinstruction, style: "display: block" %>
+    <%= form.text_area :pseudoactinstruction %>
+  </div>
+
+  <div>
+    <%= form.label :imaginationinstruction, style: "display: block" %>
+    <%= form.text_area :imaginationinstruction %>
+  </div>
+
+
+  <div>
+    <%= form.label :essay, style: "display: block" %>
+    <%= form.text_area :essay %>
+  </div>
+
+  <div>
+    <%= form.label :supplement, style: "display: block" %>
+    <%= form.text_field :supplement %>
+  </div>
+
+  <div>
+    <%= form.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>

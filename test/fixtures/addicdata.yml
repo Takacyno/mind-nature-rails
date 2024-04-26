@@ -1,0 +1,35 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  what: 1
+  severity: 1
+  progress: MyString
+  difficulties: MyString
+  frequency: MyString
+  trouble: MyString
+  method: MyString
+  goal: MyString
+  controlstimulustext: MyString
+  controlstimulusinstruction: MyText
+  pseudoactinstruction: MyText
+  imaginationinstruction: MyText
+  essayok: false
+  essay: MyText
+  supplement: MyString
+
+two:
+  what: 1
+  severity: 1
+  progress: MyString
+  difficulties: MyString
+  frequency: MyString
+  trouble: MyString
+  method: MyString
+  goal: MyString
+  controlstimulustext: MyString
+  controlstimulusinstruction: MyText
+  pseudoactinstruction: MyText
+  imaginationinstruction: MyText
+  essayok: false
+  essay: MyText
+  supplement: MyString

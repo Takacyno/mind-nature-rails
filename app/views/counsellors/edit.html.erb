@@ -1,0 +1,5 @@
+<h1>プロフィール編集</h1>
+<%= link_to '戻る', counsellor_path, class: 'btn btn-primary' %>
+<%= form_with(model: @counsellor.user, url: counsellor_path) do |form| %>
+<%= render "form", counsellor: @counsellor,form:form ,calling_view: 'edit' %>
+<% end %>

@@ -1,0 +1,49 @@
+<h1>プロフィール編集</h1>
+<%= form_for @patient.user, url: patient_path do |form| %>
+    <% if @patient.user.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(@patient.errors.count, "error") %> prohibited this user from being saved:</h2>
+  
+        <ul>
+          <% @patient.user.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class:"form-group">
+      <%= form.label :name, User.human_attribute_name(:name), class: "form-control",style: "display: block" %>
+      <%= form.text_field :name %>
+    </div>
+  
+    <div>
+      <%= form.label :email, User.human_attribute_name(:email), style: "display: block" %>
+      <%= form.text_field :email %>
+    </div>
+    
+    <%= form.fields_for :patient do |patient_fields| %>
+      <div>
+        <%= patient_fields.label :residence, Patient.human_attribute_name(:residence), style: "display: block" %>
+        <%= patient_fields.text_field :residence %>
+      </div>
+      <div>
+        <%= patient_fields.label :holiday, Patient.human_attribute_name(:holiday), style: "display: block" %>
+        <% Week.all.each do |week| %>
+          <% checked = @patient.holiday.include?(week.id)  %>
+          <% checkbox_id = "holiday_#{week.id}" %>
+          <%= label_tag checkbox_id do %>
+            <%= check_box_tag "user[patient_attributes][holiday][]", week.id, checked, id: checkbox_id %>
+            <%= t("date.abbr_day_names.#{week.id}") %>
+          <% end %>
+        <% end %>
+      </div>
+      
+    <% end %>  
+  
+  
+    <%= form.submit class: "btn btn-primary" %>
+    <%= link_to '戻る', patient_path(@patient), class: 'btn btn-primary' %>
+  <% end %>
+  
+  
+  

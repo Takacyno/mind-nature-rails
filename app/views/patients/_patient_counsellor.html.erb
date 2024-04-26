@@ -1,0 +1,24 @@
+<div>
+  <% if current_user.adminflag %>
+    <p>
+      <strong><%= I18n.t("activerecord.attributes.patient.hospital") %>:</strong>
+      <%= I18n.t("hospital.#{patient.hospital}") %>
+    </p>
+  <% end %>
+  <p>
+    <strong><%= I18n.t("activerecord.attributes.patient.addiction") %>:</strong> 
+    <%= generate_addiction_string(patient.addiction) %>
+  </p>
+  <p>
+  <strong><%= I18n.t("activerecord.attributes.patient.sex") %>:</strong> 
+    <%= I18n.t("sex.#{patient.sex}") %>
+  </p>
+  <% patient.attributes.each_with_index do |(attribute, value), index| %>
+    <% if index==1||(5..13).include?(index) %>
+      <p>
+        <strong><%= I18n.t("activerecord.attributes.patient.#{attribute}") %>:</strong> 
+        <%= value %>
+      </p>
+    <% end %>  
+  <% end %>
+</div>

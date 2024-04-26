@@ -1,0 +1,103 @@
+
+  <% if @patient.user.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@patient.user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% @patient.user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class:"form-group">
+    <%= form.label :name, User.human_attribute_name(:name) %>
+    <%= form.text_field :name , class: "form-control"%>
+  </div>
+
+  <div>
+    <%= form.label :email, User.human_attribute_name(:email) %>
+    <%= form.text_field :email, class: "form-control" %>
+  </div>
+  <% if calling_view=='edit' %>
+    <div class:"form-group">
+      <%= form.label :userstatus, User.human_attribute_name(:userstatus) %>
+      <%= form.select(:userstatus, I18n.t('userstatus').map { |key, value| [value, key] }, {selected: @patient.user.userstatus} ) %>
+    </div>
+  <% end %>
+
+  <% if calling_view=='new' %>
+    <div class:"form-group">
+      <%= form.label :password, User.human_attribute_name(:password) %>
+      <%= form.password_field :password , class: "form-control"%>
+    </div>
+    <div class:"form-group">
+      <%= form.label :password_confirmation, User.human_attribute_name(:password_confirmation) %>
+      <%= form.password_field :password_confirmation , class: "form-control"%>
+    </div>
+  <% end %>
+  <%= form.fields_for :patient do |patient_fields| %>
+    <% if current_user.adminflag? %>
+      <div class:"form-group">
+        <%= patient_fields.label :hospital, Patient.human_attribute_name(:hospital) %>
+        <%= patient_fields.select(:hospital, I18n.t('hospital').map { |key, value| [value, key] }, selected: @patient.hospital) %>
+      </div>
+    <% end %>
+    <div>
+      <%= patient_fields.label :addiction, Patient.human_attribute_name(:addiction), style: "display: block" %>
+      <% Addiction.all.each do |addic| %>
+        <% checked = @patient.addiction.include?(addic.id)  %>
+        <% checkbox_id = "addiction_#{addic.id}" %>
+        <%= label_tag checkbox_id do %>
+          <%= check_box_tag "user[patient_attributes][addiction][]", addic.id, checked, id: checkbox_id %>
+          <%= t("addiction.#{addic.id}") %>
+        <% end %>
+      <% end %>
+    </div>
+    <div>
+      <%= patient_fields.label :age, Patient.human_attribute_name(:age), style: "display: block" %>
+      <%= patient_fields.select(:age, (0..120).map { |num| [num,num] }, selected: @patient.age) %>
+    </div>
+    <div>
+      <%= patient_fields.label :sex, Patient.human_attribute_name(:sex), style: "display: block" %>
+      <%= patient_fields.select(:sex, options_for_select(I18n.t('sex').map { |key, value| [value, key] }), selected: @patient.sex) %>
+    </div>
+    <% @patient.attributes.each_with_index do |(attribute, value), index| %>
+      <% if (4..13).include?(index) %>
+        <div>
+          <%= patient_fields.label attribute, Patient.human_attribute_name(attribute), style: "display: block" %>
+          <%= patient_fields.text_field attribute %>
+        </div>
+      <% end %>  
+    <% end %>
+    
+    <div>
+      <%= patient_fields.label :testshow, Patient.human_attribute_name(:testshow), style: "display: block" %>
+      <% Test.all.each do |test| %>
+        <% checked = @patient.testshow.include?(test.id)  %>
+        <% checkbox_id = "testshow_#{test.id}" %>
+        <%= label_tag checkbox_id do %>
+          <%= check_box_tag "user[patient_attributes][testshow][]", test.id, checked, id: checkbox_id %>
+          <%= t("test.#{test.id}") %>
+        <% end %>
+      <% end %>
+    </div>
+    <div>
+      <%= patient_fields.label :holiday, Patient.human_attribute_name(:holiday), style: "display: block" %>
+      <% Week.all.each do |week| %>
+        <% checked = @patient.holiday.include?(week.id)  %>
+        <% checkbox_id = "holiday_#{week.id}" %>
+        <%= label_tag checkbox_id do %>
+          <%= check_box_tag "user[patient_attributes][holiday][]", week.id, checked, id: checkbox_id %>
+          <%= t("date.abbr_day_names.#{week.id}") %>
+        <% end %>
+      <% end %>
+    </div>
+    
+  <% end %>  
+
+
+  <%= form.submit class: "btn btn-primary" %>
+  
+
+

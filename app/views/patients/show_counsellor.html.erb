@@ -1,0 +1,22 @@
+<%= render 'user',user: @patient.user %>
+<p>
+<strong><%= I18n.t("roll") %>:</strong>
+<%= I18n.t("patient") %>
+</p>
+<%= render 'user_counsellor',user: @patient.user %>
+<%= render 'patient_counsellor',patient: @patient %>
+<%= render 'patient',patient: @patient %>
+
+<%= form_tag(patient_addicdatum_path(@patient), method: :get) do %>
+  <% Addiction.all.each do |addic| %>
+    <% if @patient.addiction.include?(addic.id)  %>
+      <%= button_tag I18n.t("addiction.#{addic.id}"), name: "button_name", value: addic.id, class: 'btn btn-primary' %>
+    <% end %>
+  <% end %>
+<% end %>
+<br>
+<div>
+  <%= link_to "編集", edit_patient_path(@patient), class: 'btn btn-primary' %>
+  <%=" " %>
+  <%= link_to "一覧へ", patients_path, class: 'btn btn-primary' %>
+</div>

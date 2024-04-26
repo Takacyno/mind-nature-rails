@@ -1,0 +1,41 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  hospital: 1
+  age: 1
+  sex: 1
+  counsellors: MyString
+  residene: MyString
+  rhythmoflife: MyString
+  interests: MyString
+  profession: MyString
+  workexp: MyString
+  harshchildhoodexp: MyString
+  criminalrecord: MyString
+  othertraumas: MyString
+  supplement: MyString
+  goal: MyString
+  testshow: MyString
+  addictions: MyString
+  holiday: MyString
+
+two:
+  name: MyString
+  hospital: 1
+  age: 1
+  sex: 1
+  counsellors: MyString
+  residene: MyString
+  rhythmoflife: MyString
+  interests: MyString
+  profession: MyString
+  workexp: MyString
+  harshchildhoodexp: MyString
+  criminalrecord: MyString
+  othertraumas: MyString
+  supplement: MyString
+  goal: MyString
+  testshow: MyString
+  addictions: MyString
+  holiday: MyString

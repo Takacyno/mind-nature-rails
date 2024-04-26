@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Addicdata</h1>
+
+<div id="addicdata">
+  <% @addicdata.each do |addicdatum| %>
+    <%= render addicdatum %>
+    <p>
+      <%= link_to "Show this addicdatum", addicdatum %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New addicdatum", new_addicdatum_path %>

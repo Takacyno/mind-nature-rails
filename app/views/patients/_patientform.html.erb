@@ -1,0 +1,15 @@
+<%= patient_fields.fields_for @patient do |patient_fields| %>
+    <div>
+      <%= patient_fields.label :residence, Patient.human_attribute_name(:residence), style: "display: block" %>
+      <%= patient_fields.text_field :residence %>
+    </div>
+    <div>
+      <%= patient_fields.label :holiday, Patient.human_attribute_name(:holiday), style: "display: block" %>
+      <% Week.all.each do |week| %>
+        <%= check_box_tag ":holiday[]", week.id, @patient.holiday[week.id - 1] == "1" %>
+        <%= label_tag "holday_#{week.id}", t("date.abbr_day_names.#{week.id}") %>
+      <% end %>
+    </div>
+    
+<% end %>  
+
