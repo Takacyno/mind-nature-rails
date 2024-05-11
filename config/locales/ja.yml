@@ -8,14 +8,14 @@ ja:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
     models:
-      patient: 患者
+      patient: クライアント
       user: ユーザー
       session: セッション
       diary: 症状日記
     attributes:
       patient:
         id: ID
-        hospital: 病院
+        hospital: 施設
         age: 年齢
         sex: 性別
         counsellors: 担当カウンセラー
