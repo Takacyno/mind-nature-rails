@@ -43,17 +43,7 @@
         <%= patient_fields.select(:hospital, I18n.t('hospital').map { |key, value| [value, key] }, selected: @patient.hospital) %>
       </div>
     <% end %>
-    <div>
-      <%= patient_fields.label :addiction, Patient.human_attribute_name(:addiction), style: "display: block" %>
-      <% Addiction.all.each do |addic| %>
-        <% checked = @patient.addiction.include?(addic.id)  %>
-        <% checkbox_id = "addiction_#{addic.id}" %>
-        <%= label_tag checkbox_id do %>
-          <%= check_box_tag "user[patient_attributes][addiction][]", addic.id, checked, id: checkbox_id %>
-          <%= t("addiction.#{addic.id}") %>
-        <% end %>
-      <% end %>
-    </div>
+    
     <div>
       <%= patient_fields.label :age, Patient.human_attribute_name(:age), style: "display: block" %>
       <%= patient_fields.select(:age, (0..120).map { |num| [num,num] }, selected: @patient.age) %>

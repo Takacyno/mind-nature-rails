@@ -11,6 +11,7 @@ ja:
       patient: 患者
       user: ユーザー
       session: セッション
+      diary: 症状日記
     attributes:
       patient:
         id: ID
@@ -30,7 +31,7 @@ ja:
         supplement: 補足
         goal: 目標
         testshow: テストの表示
-        addiction: 標的行動
+        addiction: 症状
         holiday: 休み
         created_at: 登録日時
         updated_at: 更新日時
@@ -58,16 +59,45 @@ ja:
         essayok: 描写文OK
         essay: 描写文
         supplement: 補足
+      diary:
+        starttime: 開始時刻
+        endtime: 終了時刻
+        place: 場所
+        people: 誰と
+        impetus: 動機
+        what: 何を
+      funeventread:
+        word: 20単語の書き出し
       counsellor:
         hospital: 病院
       session:
         email: メールアドレス
         password: パスワード
+  todo:
+    diary: 日記
+    funeventabstract: 良かったことの書き出し
+    funeventconcrete: 良かったことの詳細
+    funeventread: 良かったことの読み返し
+    essay: 描写文
+    essayread: 描写文の読み返し
+    controlstimulu: 制御刺激
+    pseudoact: 擬似行為
+    imagination: 想像
+    chat: チャット
   roll: 役職
   patient: 患者
   counsellor: カウンセラー
   director: 院長
   admin: 管理者
+  other: その他
+  new: 新規登録
+  index: 一覧
+  edit: 編集
+  show: 詳細
+  select: 選択
+  back: 戻る
+  read: 読んだ
+  times: 回
   userstatus:
     false: 停止中
     true: 進行中
@@ -85,10 +115,136 @@ ja:
     4: 疑似行為の理解度テスト
     5: 想像の理解度テスト
     6: 維持の理解度テスト
-
   sex:
     1: "男"
     2: "女"
+  alcohol:
+    name:
+      1: ビール
+      2: ストロング缶
+      3: 日本酒
+      4: ワイン
+      5: 焼酎
+      6: ウイスキー
+      7: ハイボール
+    amount:
+      1: 1
+      2: 2
+      3: 3
+      4: 4
+      5: 5
+      6: 6
+      7: 7
+      8: 8
+      9: 9
+      10: 10～
+      11: 300～400
+      12: 400～500
+      13: 500～700
+      14: 7000～1000
+      15: 1000～
+    unit:
+      1: 缶
+      2: 杯
+      3: ml
+      4: ビン
+      5: 合
+  observation:
+    autonomicnerves:
+      1: 気持ちよさ 
+      2: 髪が逆立つ感じ 
+      3: 明るく見える 
+      4: 鼻水 
+      5: 口や喉の渇き 
+      6: 唾液分泌過多 
+      7: 喉のすぼまり感 
+      6: 嘔気嘔吐 
+      7: 動悸 
+      8: 息を止めた 
+      9: 発汗 
+      10: 血管収縮 
+      11: 胃腸蠕動亢進 
+      12: 尿意 
+      13: その他 
+      14: なし
+    feeling:
+      1: うれしい 
+      2: 楽しい 
+      3: 高ぶった
+      4: 気合が入った
+      5: やる気が出た
+      6: ほっとした
+      7: 悲しい
+      8: 怖い
+      9: その他
+      10: なし
+    direction:
+      1: 視覚（映像）
+      2: 聴覚
+      3: 嗅覚
+      4: 味覚
+      5: 触覚
+      6: 痛覚
+      7: 温度覚
+      8: その他
+      9: なし
+    drivingforce:
+      1: やりたくて、我慢できないほどで、苦痛なのでどうにかしてほしい
+      2: やりたいが、我慢することができる
+      3: やりたさはわずかにあるが、我慢が必要なほどではない
+      4: やりたいと思わない
+    other:
+      1: 新鮮 
+      2: こわばり
+      3: その他
+      4: なし
+    completion:
+      1: 完了した、あるいはほとんど完了した
+      2: 他者に途中で止められた
+      3: 他者の指示に従って、途中で止めた
+      4: 自分で途中で止めた
+    interruption:
+      1: 妙な感じがあった
+      2: がっかりした
+      3: 続けたいと感じた
+      4: 苦しい感じがあった
+      5: 怒りを感じた
+      6: その他
+      7: 何も感じなかった
+    post:
+      1: しなかった
+      2: したが、変化はなかった
+      3: して、変化があった
+    people:
+      1: 単独で
+      2: 職員同席で
+    timezone: 
+      1: 出かける前
+      2: 休み時間
+      3: 帰宅後
+      4: 就寝前
+    text:
+      finish: 今回は最後まで行ってください
+      interrupt: 今回は中断してください
+      finished: 完了 
+      interrupted: 中断
+      introductionbefore: をする前、体や精神に生じている変化には次のいずれがありますか
+      introductionafter: をした後では、どのような感覚があったでしょうか
+      autonomicnerves: 自律神経症状
+      feeling: 気分
+      direction: 動作の方向
+      drivingforce: 動作の駆動（本物あるいは偽物への現時点の欲求の強さに最も近いものを選ぶ）
+      other: その他
+      othertext: 詳細
+      completion: を
+      interruption: 中断した時に
+      interruptiontext: 詳細
+      post: 中断後あるいは完了後、おまじない（制御刺激）を
+      posttext: 変化の詳細
+      people: 行ったのは
+      peopletext: 職員名
+      timezone: 時間帯
+      word: 20単語の書き出し
   date:
     abbr_day_names:
       0: 日

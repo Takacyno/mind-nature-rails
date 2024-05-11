@@ -1,0 +1,2 @@
+module PsudoactsHelper
+end

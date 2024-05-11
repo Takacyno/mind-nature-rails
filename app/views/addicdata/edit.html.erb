@@ -1,0 +1,9 @@
+<h1><%= I18n.t("addiction.#{@addicdatum.what}") %> データの編集</h1>
+<%= form_with(model: @addicdatum, url: patient_addicdatum_path(@patient)) do |form| %>
+<%= render "form", addicdatum: @addicdatum,form:form %>
+<% end %>
+<br>
+
+<div>
+  <%= link_to "戻る",patient_addicdatum_path ,class: 'btn btn-primary' %> 
+</div>

@@ -1,0 +1,27 @@
+<h1><%=I18n.t("addiction.#{@addicdatum.what}") %>記録一覧</h1>
+<%= link_to "戻る", patient_addicdatum_path(patient_id:@addicdatum.patient.id,id:@addicdatum.id), class: 'btn btn-primary' %>
+<%= link_to "新規登録", new_patient_addicdatum_diary_path,class: 'btn btn-primary' %>
+<table class="table table-hover">
+    <thead class="thead-default">
+        <tr>
+            <th><%= Diary.human_attribute_name(:starttime) %></th>
+            <% if current_user.adminflag %>
+            <th><%= I18n.t("activerecord.attributes.diary.what") %></th>
+            <% end %>
+        </tr>
+    </thead>
+    <tbody>
+        <% @diaries.each_with_index do |diary,index| %>
+            <tr>
+                <td><%= link_to diary.starttime, patient_addicdatum_diary_path(id:diary.id) %></td>
+                <td>
+                <% case @addicdatum.what %>
+                <% when 1 %>
+                  <%= generate_alcohol_string(diary) %>
+
+                <% end %>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

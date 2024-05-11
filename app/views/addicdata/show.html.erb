@@ -1,0 +1,6 @@
+<%= render 'addicdatum', addicdatum: @addicdatum %>
+
+<div>
+  <%= link_to "編集", edit_patient_addicdatum_path(id:@addicdatum.id) ,class: 'btn btn-primary' %> 
+  <%= link_to "戻る", patient_addicdata_path ,class: 'btn btn-primary' %>
+</div>

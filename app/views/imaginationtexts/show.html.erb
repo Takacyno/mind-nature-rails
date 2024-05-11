@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @imaginationtext %>
+
+<div>
+  <%= link_to "Edit this imaginationtext", edit_imaginationtext_path(@imaginationtext) %> |
+  <%= link_to "Back to imaginationtexts", imaginationtexts_path %>
+
+  <%= button_to "Destroy this imaginationtext", @imaginationtext, method: :delete %>
+</div>

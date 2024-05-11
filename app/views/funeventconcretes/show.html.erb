@@ -1,0 +1,7 @@
+<%= render @funeventconcrete %>
+
+<div>
+  <%= link_to I18n.t("edit"), edit_patient_funeventabstract_funeventconcrete_path(id:@funeventconcrete.id,funeventabstract_id:@funeventabstract.id,addicdatum_id:@addicdatum.id) %>
+  <%= link_to I18n.t("index"), patient_funeventconcretes_path(addicdatum_id:@addicdatum.id,funeventabstract_id:@funeventabstract.id), class: 'btn btn-primary' %>
+
+</div>

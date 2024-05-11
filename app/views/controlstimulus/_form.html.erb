@@ -1,0 +1,7 @@
+<div class="form-group">
+  <%= @addicdatum.controlstimulustext %>
+</div>
+  <%= select_tag "controlstimulu[num]", options_for_select((1..20).map { |num| [num, num] }, selected: controlstimulu.num) %>
+<div>
+  <%= form.submit class: 'btn btn-primary' %>
+</div>

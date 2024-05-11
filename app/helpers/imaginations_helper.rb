@@ -1,0 +1,2 @@
+module ImaginationsHelper
+end

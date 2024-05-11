@@ -1,0 +1,6 @@
+<h1>New funeventabstract</h1>
+<%= link_to I18n.t("back"), patient_funeventabstracts_path(addicdatum_id:@addicdatum.id), class: 'btn btn-primary' %>
+<%= form_with(model: @funeventabstract,url:
+patient_funeventabstracts_path(patient_id:@patient.id,addicdatum_id:@addicdatum.id)) do |form| %>
+<%= render "form", funeventabstract: @funeventabstract,form:form %>
+<% end %>

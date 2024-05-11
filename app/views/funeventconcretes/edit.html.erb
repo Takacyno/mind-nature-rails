@@ -1,0 +1,6 @@
+<h1><%=I18n.t("todo.funeventconcrete") %><%=I18n.t("edit") %></h1>
+<%= link_to I18n.t("back"), patient_funeventabstract_funeventconcrete_path(id:@funeventconcrete.id,funeventabstract_id:@funeventabstract.id,addicdatum_id:@addicdatum.id), class: 'btn btn-primary' %>
+<%= form_with(model: @funeventconcrete,url:
+patient_funeventabstract_funeventconcrete_path(patient_id:@patient.id,addicdatum_id:@addicdatum.id,funeventabstract_id:@funeventabstract.id,id:@funeventconcrete.id)) do |form| %>
+<%= render "form", funeventconcrete: @funeventconcrete,form:form %>
+<% end %>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-          <title>ScaffoldApp</title>
+          <title>Mind-Nature</title>
           <meta name="viewport" content="width=device-width,initial-scale=1">
           <%= csrf_meta_tags %>
           <%= csp_meta_tag %>
@@ -10,7 +10,11 @@
    </head>
    <body>
       <nav class="app-title navbar navbar-expand-md navbar-light bg-light">
+
         <ul class="navbar-nav ml-auto">
+        <% if (request.url.include?("/addicdata/")||request.url.include?("/funevent"))&&!request.url.include?("/addicdata/new") %>
+            <li class="nav-item"><label id="humOpen" for="humCheck"><%= image_tag("bars_24.png") %></label></li>
+          <% end %>
           <% if current_user %>
           <li class="nav-item"><%= link_to 'ログアウト', logout_path, class: 'nav-link' %></li>
           <% else %>
@@ -24,6 +28,24 @@
         <% end %>
         <%= yield %>
       </div>
+      <% if (request.url.include?("/addicdata/")||request.url.include?("/funevent"))&&!request.url.include?("/addicdata/new") %>
+      <input id="humCheck" type="checkbox" class="fadein">
+      <label id="humClose" for="humCheck"></label>
+      <div id="humFadein" >
+        <ul>
+        
+        <li><%= link_to I18n.t("todo.diary"), patient_addicdatum_diaries_path(addicdatum_id:@addicdatum.id),class: 'btn btn-primary' %> </li>
+        <li><%= link_to I18n.t("todo.funeventabstract"), patient_funeventabstracts_path(addicdatum_id:@addicdatum.id),class: 'btn btn-primary' %> </li>
+        <li><%= link_to I18n.t("todo.funeventconcrete"), patient_funeventconcretes_path(addicdatum_id:@addicdatum.id),class: 'btn btn-primary' %> </li>
+        <li><%= link_to I18n.t("todo.funeventread"), patient_funeventreads_path(addicdatum_id:@addicdatum.id),class: 'btn btn-primary' %> </li>
+        <li><%= link_to I18n.t("todo.essay"), patient_addicdatum_essay_path(addicdatum_id:@addicdatum.id),class: 'btn btn-primary' %> </li>
+        <li><%= link_to I18n.t("todo.essayread"), patient_addicdatum_essayreads_path(addicdatum_id:@addicdatum.id),class: 'btn btn-primary' %> </li>
+        <li><%= link_to I18n.t("todo.controlstimulu"), patient_addicdatum_controlstimulus_path(addicdatum_id:@addicdatum.id),class: 'btn btn-primary' %> </li>
+        <li><%= link_to I18n.t("todo.pseudoact"), patient_addicdatum_pseudoacts_path(addicdatum_id:@addicdatum.id),class: 'btn btn-primary' %> </li>
+        <li><%= link_to I18n.t("todo.imagination"), patient_addicdatum_imaginationtexts_path(addicdatum_id:@addicdatum.id),class: 'btn btn-primary' %> </li>
+        </ul>
+      </div>
+      <% end %>
   </body>
 </html>
 

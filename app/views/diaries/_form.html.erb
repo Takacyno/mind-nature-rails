@@ -1,0 +1,44 @@
+
+  <% if diary.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(diary.errors.count, "error") %> prohibited this diary from being saved:</h2>
+
+      <ul>
+        <% diary.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :starttime, style: "display: block" %>
+    <%= form.datetime_field :starttime %>
+  </div>
+
+  <div>
+    <%= form.label :endtime, style: "display: block" %>
+    <%= form.datetime_field :endtime %>
+  </div>
+
+  <div>
+    <%= form.label :place, style: "display: block" %>
+    <%= form.text_field :place %>
+  </div>
+
+  <div>
+    <%= form.label :people, style: "display: block" %>
+    <%= form.text_field :people %>
+  </div>
+
+  <div>
+    <%= form.label :impetus, style: "display: block" %>
+    <%= form.text_field :impetus %>
+  </div>
+  <% case @addicdatum.what %>
+  <% when 1 %>
+    <%= render "alcoholdiaryform", alcoholdiary: @diary.alcoholdiary,form:form %>
+  <% end %>
+  <div>
+    <%= form.submit class: 'btn btn-primary' %>
+  </div>

@@ -1,0 +1,27 @@
+<h1>症状一覧</h1>
+<% if current_user.adminflag? %>
+    <%= link_to "戻る", patient_path(@patient), class: 'btn btn-primary' %>
+<% end %>
+<% if current_user.counsellorflag? %>
+<%= link_to '新規登録', new_patient_addicdatum_path, class: 'btn btn-primary' %>
+<% end %>
+<table class="table table-hover">
+    <thead class="thead-default">
+        <tr>
+            <th><%= Patient.human_attribute_name(:addiction) %></th>
+            <% if current_user.adminflag %>
+            <th><%= Addicdatum.human_attribute_name(:goal) %></th>
+            <% end %>
+        </tr>
+    </thead>
+    <tbody>
+        <% @addicdata.each do |addicdatum| %>
+            <tr>
+                <td><%= link_to I18n.t("addiction.#{addicdatum.what}"), patient_addicdatum_path(id:addicdatum.id) %></td>
+                <td><%= addicdatum.goal %></td>    
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+

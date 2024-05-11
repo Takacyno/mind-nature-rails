@@ -63,8 +63,8 @@ class PatientsController < ApplicationController
 
   def generate_addiction_string(addiction)
     result = ""    
-    addiction.each do |index|
-      result += I18n.t("addiction.#{index}") + " "
+    @patient.addicdata.each do |index|
+      result += I18n.t("addiction.#{index.what}") + " "
     end
     return result
   end
@@ -77,7 +77,13 @@ class PatientsController < ApplicationController
 
     def set_patient
       if current_user.counsellorflag?
-        @patient = Patient.find(params[:id])
+        #view_directory=File.dirname(request.path)
+        #case view_directory
+        #when "/patients"
+        #  @patient = Patient.find(params[:id])
+        #else
+          @patient = Patient.find(params[:id])
+        #end
       else
         @patient = User.find(session[:user_id]).patient
       end
@@ -89,15 +95,15 @@ class PatientsController < ApplicationController
     def patient_params
       if current_user.adminflag?
         if params[:action]=='create'
-          params.require(:user).permit(:name, :email,:userstatus,:password,:password_confirmation, patient_attributes: [ :id,:hospital,:age,:sex,:residence,:rhythmoflife,:interests,:profession,:workexp,:harshchildhoodexp,:criminalrecord,:othertraumas,:supplement,:goal, :holiday => [], :testshow => [], :addiction => []]).merge(userstatus:1)
+          params.require(:user).permit(:name, :email,:userstatus,:password,:password_confirmation, patient_attributes: [ :id,:hospital,:age,:sex,:residence,:rhythmoflife,:interests,:profession,:workexp,:harshchildhoodexp,:criminalrecord,:othertraumas,:supplement,:goal, :holiday => [], :testshow => []]).merge(userstatus:1)
         elsif params[:action]=='update'
-          params.require(:user).permit(:name, :email,:userstatus, patient_attributes: [ :id,:hospital,:age,:sex,:residence,:rhythmoflife,:interests,:profession,:workexp,:harshchildhoodexp,:criminalrecord,:othertraumas,:supplement,:goal, :holiday => [], :testshow => [], :addiction => []])
+          params.require(:user).permit(:name, :email,:userstatus, patient_attributes: [ :id,:hospital,:age,:sex,:residence,:rhythmoflife,:interests,:profession,:workexp,:harshchildhoodexp,:criminalrecord,:othertraumas,:supplement,:goal, :holiday => [], :testshow => []])
         end
       elsif current_user.counsellorflag?
         if params[:action]=='create'
-          params.require(:user).permit(:name, :email,:userstatus,:password,:password_confirmation, patient_attributes: [ :id,:age,:sex,:residence,:rhythmoflife,:interests,:profession,:workexp,:harshchildhoodexp,:criminalrecord,:othertraumas,:supplement,:goal, :holiday => [], :testshow => [], :addiction => []]).merge(userstatus:1)
+          params.require(:user).permit(:name, :email,:userstatus,:password,:password_confirmation, patient_attributes: [ :id,:age,:sex,:residence,:rhythmoflife,:interests,:profession,:workexp,:harshchildhoodexp,:criminalrecord,:othertraumas,:supplement,:goal, :holiday => [], :testshow => []]).merge(userstatus:1)
         elsif params[:action]=='update'
-          params.require(:user).permit(:name, :email,:userstatus, patient_attributes: [ :id,:age,:sex,:residence,:rhythmoflife,:interests,:profession,:workexp,:harshchildhoodexp,:criminalrecord,:othertraumas,:supplement,:goal, :holiday => [], :testshow => [], :addiction => []])
+          params.require(:user).permit(:name, :email,:userstatus, patient_attributes: [ :id,:age,:sex,:residence,:rhythmoflife,:interests,:profession,:workexp,:harshchildhoodexp,:criminalrecord,:othertraumas,:supplement,:goal, :holiday => [], :testshow => []])
         end     
       else
         params.require(:user).permit(:name, :email, patient_attributes: [:residence, :id, :holiday => []])

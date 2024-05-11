@@ -1,0 +1,8 @@
+<div class="form-group">
+  <%= @addicdatum.essay %>
+</div>
+  <%= check_box_tag "essayread[num]", 1 %>
+  <%= label_tag "essayread[num]", I18n.t("read") %>
+<div>
+  <%= form.submit class: 'btn btn-primary' %>
+</div>

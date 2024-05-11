@@ -1,0 +1,7 @@
+<h1><%= I18n.t("todo.pseudoact")+I18n.t("new") %></h1>
+<%= link_to I18n.t("back"), patient_addicdatum_pseudoact_path(id:@pseudoact.id), class: 'btn btn-primary' %>
+<%= form_with(model: @pseudoact,url:
+patient_addicdatum_pseudoact_path(addicdatum_id:@addicdatum.id)) do |form| %>
+  <%= render "form", pseudoact: @pseudoact,form:form %>
+<% end %>
+

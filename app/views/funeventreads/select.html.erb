@@ -1,0 +1,12 @@
+<h1>読み返す<%=I18n.t("todo.funeventabstract")%>を選択</h1>
+<%= link_to I18n.t("back"), patient_funeventreads_path(addicdatum_id:@addicdatum.id),class: 'btn btn-primary' %>
+<table class="table table-hover">
+    <tbody>
+        <% @funeventabstracts.each do |funeventabstract| %>
+          <tr>
+              <td><%= funeventabstract.abstract %></td>    
+              <td><%= link_to "読み返す", new_patient_funeventabstract_funeventread_path(funeventabstract_id:funeventabstract.id,addicdatum_id:@addicdatum.id) %></td>
+          </tr>
+        <% end %>
+    </tbody>
+</table>

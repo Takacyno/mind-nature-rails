@@ -1,0 +1,21 @@
+  <% if funeventconcrete.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(funeventconcrete.errors.count, "error") %> prohibited this funeventconcrete from being saved:</h2>
+
+      <ul>
+        <% funeventconcrete.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>
+  <%= funeventconcrete.funeventabstract.abstract %>    
+  </p>
+  <div class="form-group">
+  <%= form.label :concrete, I18n.t("todo.funeventconcrete"), style: "display: block" %>
+  <%= form.text_area :concrete ,class:'form-control' %>
+</div>
+  <div>
+    <%= form.submit class: 'btn btn-primary' %>
+  </div>

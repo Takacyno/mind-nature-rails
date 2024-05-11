@@ -1,0 +1,2 @@
+module FuneventreadsHelper
+end

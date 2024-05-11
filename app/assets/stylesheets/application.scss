@@ -1,1 +1,56 @@
 @import "bootstrap";
+#humMenu {
+    padding: 12px;
+    margin-left: 0%;
+    background: white;
+    }
+    #humCheck, #humClose { display:none; }
+    #humOpen {
+    cursor: pointer;
+    }
+    #humOpen:hover {
+    opacity: 0.5;
+    }
+    #humOpen img { 
+        width :40px;
+    }
+    #humClose, #humFadein {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    }
+    #humClose {
+    z-index: 2;
+    width: 100%;
+    background: gray;
+    opacity: 0.8;
+    transition: 0.5s;
+    }
+    ol li{
+        text-decoration: none;    
+    }
+    ol li a{
+    text-decoration: none;
+    }
+    #humFadein {
+    z-index: 3;
+    width: 300px;
+    background: white;
+    transition: 0.5s;
+    transform: translateX(-100%);
+    }
+    #humCheck:checked ~ #humClose { display: inline-block; }
+    #humCheck:checked ~ #humFadein {
+    transform: translateX(0);
+    }
+    .inlineBlock{
+        display: inline-block;
+    }
+    .hidden{
+        visibility: hidden;
+    }
+    .red{
+        color: red;
+        background-color: red;
+    }

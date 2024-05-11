@@ -1,0 +1,10 @@
+<h1><%= Patient.human_attribute_name(:addiction) %>日記の編集</h1>
+<div>
+  <%= link_to I18n.t("back"), patient_addicdatum_diary_path(id:@diary.id),class: 'btn btn-primary' %>
+</div>
+<%= form_with(model: @diary, url: patient_addicdatum_diary_path(@addicdatum)) do |form| %>
+<%= render "form", diary: @diary,form:form %>
+<% end %>
+
+
+

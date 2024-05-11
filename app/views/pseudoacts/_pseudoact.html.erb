@@ -1,0 +1,58 @@
+<table><tbody><tr>
+<% (0..1).each do |beforeAfter| %>
+  <td>
+    <% pseudoact.attributes.each_with_index do |(attribute,value),index| %>
+      <% if (2+6*beforeAfter..7+6*beforeAfter).include?(index) %>
+        <% if attribute.include?("text") %>
+            <div class="hidden">
+            <p><%= label attribute, I18n.t("observation.text.#{attribute.sub(/before/,'').sub(/after/,'')}") %></p>
+            <%= text_field attribute ,class:"form-control",disabled:true %>
+            </div>
+        <% elsif attribute.include?("drivingforce") %>
+            <p><%= label "pseudoact[#{attribute}]", I18n.t("observation.text.#{attribute.sub(/before/,'').sub(/after/,'')}") %></p>
+            <%= select_tag "pseudoact[#{attribute}]",options_for_select(I18n.t("observation.#{attribute.sub(/before/,'').sub(/after/,'')}").map { |key, labelname| [labelname, key] }, selected: value.present? ? value : 1),disabled:true %>
+        <% else %>
+          <p><%= label attribute, I18n.t("observation.text.#{attribute.sub(/before/,'').sub(/after/,'')}") %></p>
+          <div>
+          <% I18n.t("observation.#{attribute.sub(/before/,'').sub(/after/,'')}").each.with_index(1) do |(labelindex,labelname)| %>
+            <% if attribute.include?("other")&&labelindex==3 %>
+              <%= check_box_tag "pseudoact[#{attribute}][]", labelindex, value.present?&&value.include?(labelindex),id:"pseudoact_#{attribute}_#{labelindex}" ,disabled:true %>
+            <% else %>
+              <%= check_box_tag "pseudoact[#{attribute}][]", labelindex, value.present?&&value.include?(labelindex),id:"pseudoact_#{attribute}_#{labelindex}" ,disabled:true %>
+            <% end %> 
+            <%= label_tag "pseudoact[#{attribute}][#{labelindex}]", labelname %>
+          <% end %>    
+          </div>
+        <% end %>    
+      <% end %>
+    <% end %>
+  </td>
+<% end %>
+</tr></tbody></table>
+<% pseudoact.attributes.each_with_index do |(attribute,value),index| %>
+  
+  <% if (14..20).include?(index) %>
+    <% if attribute.include?("text") %>
+        <div class="hidden">
+        <p><%= label attribute, I18n.t("observation.text.#{attribute}") %></p>
+        <%= text_field attribute ,class:"form-control",disabled:true %>
+        </div>
+        <% if attribute.include?("interrupt") %>
+          </div>
+        <% end %>    
+    <% else %>
+        <% if attribute.include?("interrupt") %>
+          <div class="hidden">
+        <% end %>    
+        <% if attribute.include?("completion") %>
+          <p><%= label "pseudoact[#{attribute}]", I18n.t("todo.pseudoact")+I18n.t("observation.text.#{attribute}") %></p>
+        <% else %>
+          <p><%= label "pseudoact[#{attribute}]", I18n.t("observation.text.#{attribute}") %></p>
+        <% end %>          
+        <%= select_tag "pseudoact[#{attribute}]",options_for_select(I18n.t("observation.#{attribute}").map { |key, labelname| [labelname, key] }, selected: value.present? ? value : 1),disabled:true %>
+    <% end %>    
+  <% elsif index==21 %>
+      <p><%= label "pseudoact[#{attribute}]", I18n.t("observation.text.#{attribute}") %></p>
+      <%= select_tag "pseudoact[#{attribute}]",options_for_select(I18n.t("observation.#{attribute}").map { |key, labelname| [labelname, key] }, selected: value.present? ? value : 1),disabled:true %>
+  <% end %>
+<% end %>

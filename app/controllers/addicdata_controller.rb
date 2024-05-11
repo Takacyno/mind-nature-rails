@@ -1,47 +1,45 @@
 class AddicdataController < ApplicationController
   include SetPatient
-  before_action :set_patient_addic
-  #before_action :set_addicdata, only: %i[ show edit update frontCover]
-  #before_action :set_new_addicdata, only: %i[ new create]
+  before_action :set_patient_addic 
+  before_action :set_addicdatum, only: %i[ edit update show]
+  before_action :set_new_addicdatum, only: %i[ new create]
   
   def index
-    if current_user.adminflag
-      @patients=Patient.all.order(created_at: :desc)
-    else
-      @patients=Patient.where(hospital: current_user.counsellor.hospital).order(created_at: :desc)
-    end
+    @addicdata=@patient.addicdata
   end
 
   def show
-    @addicdatum = @patient.addicdatum.find_by(what: params[:button_name])
-    redirect_to new_patient_addicdatum_path(@patient) unless @addicdatum
   end
 
   def new
-    @addicdatum = Addicdatum.new
-    @addicdatum.what=params[:button_name]
-    render 'patients/addicdata/new'
+    @newaddiction={}
+    @index=[]
+    I18n.t('addiction').each.with_index(1) do |addiction,index|
+      @index.push(index)
+    end
+    @patient.addicdata.each do |addicdatum|
+      @index.delete(addicdatum.what)
+    end
+    @index.each do |index|
+      @newaddiction[index]=I18n.t("addiction.#{index}") 
+    end
   end
 
   def edit
-    if current_user.counsellorflag?
-      render 'edit_counsellor'
-    end
   end
   
   def create
-    @addicdatum = Addicdatum.new
     ActiveRecord::Base.transaction do
       logger.debug "Params received in addicdatum_params: #{params.inspect}"
 
       if @addicdatum.update(addicdatum_params)
-        redirect_to patient_addicdatum_path(@patient), notice: '更新が完了しました'
+        redirect_to patient_addicdata_path, notice: '更新が完了しました'
       else
         flash.now[:alert]="更新に失敗しました"
-        render new
-        
+        raise ActiveRecord::Rollback # ロールバック
+        redirect_to new_patient_addicdatum_path
       end
-      raise ActiveRecord::Rollback unless @addicdatum.persisted?
+      
     end    
   end
 
@@ -49,41 +47,60 @@ class AddicdataController < ApplicationController
     ActiveRecord::Base.transaction do
       logger.debug "Params received in patient_params: #{params.inspect}"
 
-      if @patient.user.update(patient_params)
-        redirect_to patient_path, notice: '更新が完了しました'
+      if @addicdatum.update(addicdatum_params)
+        redirect_to patient_addicdatum_path, notice: '更新が完了しました'
       else
         flash.now[:alert]="更新に失敗しました"
-        render :edit
         raise ActiveRecord::Rollback # ロールバック
+        redirect_to patient_addicdatum_path
       end
     end    
   end
   
   private
-    def set_new_addicdata
-      @addicdata=Addicdata.new
+    def set_new_addicdatum
+      @addicdatum = @patient.addicdata.build
     end
-
+    def set_addicdatum
+      @addicdatum = @patient.addicdata.find(params[:id])
+    end
     def addicdatum_params
-      params.require(:addicdatum).permit(
-      :what,
-      :severity,
-      :progress,
-      :difficulties,
-      :frequency,
-      :trouble,
-      :method,
-      :goal,
-      :controlstimulustext,
-      :controlstimulusinstruction,
-      :pseudoactinstruction,
-      :imaginationinstruction,
-      :essay,
-      :supplement,
-      ).merge(what: params[:button_name])
-      
+      if params[:action]=='create'
+        params.require(:addicdatum).permit(
+        :what,
+        :severity,
+        :progress,
+        :difficulties,
+        :frequency,
+        :trouble,
+        :method,
+        :goal,
+        :controlstimulustext,
+        :controlstimulusinstruction,
+        :pseudoactinstruction,
+        :imaginationinstruction,
+        :essay,
+        :supplement,
+        :patient_id
+        )
+      else
+        params.require(:addicdatum).permit(
+          :severity,
+          :progress,
+          :difficulties,
+          :frequency,
+          :trouble,
+          :method,
+          :goal,
+          :controlstimulustext,
+          :controlstimulusinstruction,
+          :pseudoactinstruction,
+          :imaginationinstruction,
+          :essay,
+          :supplement,
+          :patient_id
+          )
+      end
     end
-
-    
-    
+ 
 end

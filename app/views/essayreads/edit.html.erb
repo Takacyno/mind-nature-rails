@@ -1,0 +1,12 @@
+<h1><%=I18n.t("todo.essay") %></h1>
+<%= form_with(model: @essayread,url:
+patient_addicdatum_essayread_path(patient_id:@addicdatum.patient_id,addicdatum_id:@addicdatum.id)) do |form| %>
+  <div class="form-group">
+    <%= @addicdatum.essay %>
+  </div>
+    <%= check_box_tag ":num" %>
+    <%= label_tag ":num", I18n.t("read") %>
+  <div>
+    <%= form.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>

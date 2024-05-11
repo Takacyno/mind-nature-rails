@@ -1,0 +1,24 @@
+<%= form.fields_for :alcoholdiary do |alcoholdiary_fields| %>
+
+    
+    <% alcoholdiary.attributes.each_with_index do |(attribute, value), index| %>
+        <% if (1..Alcohol.count).include?(index) %>
+            <% checked = value.include?(0)  %>
+            <% checkbox_id = "alcohol_#{index}" %>
+            <%= label_tag checkbox_id do %>
+                <%= check_box_tag "diary[alcoholdiary_attributes][#{attribute}][]", 0, checked, id: checkbox_id %>
+                <%= I18n.t("alcohol.name.#{index}") %>
+            <% end %>
+            <div id: "alcohol_#{index}_div">
+            <%= select_tag "diary[alcoholdiary_attributes][#{attribute}][]",options_for_select(I18n.t('alcohol.amount').map { |key, value| [value, key] }, selected: @alcohol_amount[index]) %>
+            <%= select_tag "diary[alcoholdiary_attributes][#{attribute}][]",options_for_select(I18n.t('alcohol.unit').map { |key, value| [value, -key] }, selected: @alcohol_unit[index]) %>
+            </div>
+        <% end %>  
+    <% end %>
+
+    <div>
+      <%= alcoholdiary_fields.label :other, I18n.t("other"), style: "display: block" %>
+      <%= alcoholdiary_fields.text_field :other %>
+    </div>
+<% end %>    
+  

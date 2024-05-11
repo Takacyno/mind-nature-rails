@@ -1,0 +1,12 @@
+<h1><%=I18n.t("todo.funeventread")%></h1>
+<%= link_to I18n.t("new"), patient_select_funeventread_path(addicdatum_id:@addicdatum.id) %>
+<table class="table table-hover">
+    <tbody>
+        <% @funeventreads.each do |funeventread| %>
+            <tr>
+                <td><%= funeventread.funeventabstract.abstract %></td>
+                <td><%= link_to funeventread.word.present? ? funeventread.word[0]+" "+funeventread.word[1]+" "+funeventread.word[2] : "",patient_funeventabstract_funeventread_path(id:funeventread.id,funeventabstract_id:funeventread.funeventabstract.id,addicdatum_id:@addicdatum.id) %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

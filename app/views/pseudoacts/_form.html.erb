@@ -1,0 +1,84 @@
+
+<% if pseudoact.errors.any? %>
+  <div style="color: red">
+    <h2><%= pluralize(pseudoact.errors.count, "error") %> prohibited this pseudoact from being saved:</h2>
+
+    <ul>
+      <% pseudoact.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<% @beforeAfter=["before","after"] %>
+<table><tbody><tr>
+<% (0..1).each do |beforeAfter| %>
+  <td>
+    <% pseudoact.attributes.each_with_index do |(attribute,value),index| %>
+      <% if (2+6*beforeAfter..7+6*beforeAfter).include?(index) %>
+        <% if attribute.include?("text") %>
+
+            <div class=<%= pseudoact.attributes["other#{@beforeAfter[beforeAfter]}"].include?(3) ? "" : "hidden" %> >
+            <p><%= form.label attribute, I18n.t("observation.text.#{attribute.sub(/before/,'').sub(/after/,'')}") %></p>
+            <%= form.text_field attribute ,class:"form-control" %>
+            </div>
+        <% elsif attribute.include?("drivingforce") %>
+            <p><%= form.label "pseudoact[#{attribute}]", I18n.t("observation.text.#{attribute.sub(/before/,'').sub(/after/,'')}") %></p>
+            <%= select_tag "pseudoact[#{attribute}]",options_for_select(I18n.t("observation.#{attribute.sub(/before/,'').sub(/after/,'')}").map { |key, labelname| [labelname, key] }, selected: value.present? ? value : 1) %>
+        <% else %>
+          <p><%= form.label attribute, I18n.t("observation.text.#{attribute.sub(/before/,'').sub(/after/,'')}") %></p>
+          <div>
+          <% I18n.t("observation.#{attribute.sub(/before/,'').sub(/after/,'')}").each.with_index(1) do |(labelindex,labelname)| %>
+            <% if attribute.include?("other")&&labelindex==3 %>
+              <%= check_box_tag "pseudoact[#{attribute}][]", labelindex, value.present?&&value.include?(labelindex),id:"pseudoact_#{attribute}_#{labelindex}" ,onclick: "textDisplayCheck(this)" %>
+            <% else %>
+              <%= check_box_tag "pseudoact[#{attribute}][]", labelindex, value.present?&&value.include?(labelindex),id:"pseudoact_#{attribute}_#{labelindex}" %>
+            <% end %> 
+            <%= label_tag "pseudoact[#{attribute}][#{labelindex}]", labelname %>
+          <% end %>    
+          </div>
+        <% end %>    
+      <% end %>
+    <% end %>
+  </td>
+<% end %>
+</tr></tbody></table>
+<% @display=[[2,3,4],[6],[],[3],[],[2],[]] %>
+<% pseudoact.attributes.each_with_index do |(attribute,value),index| %>
+  
+  <% if (14..20).include?(index) %>
+    <% if attribute.include?("text") %>
+        <div class=
+        <% pseudoact.attributes.each_with_index do |(attribute2,value2),index2| %>
+          <% if index2==index-1 %>
+          <%= @display[index2-14].include?(value2) ? "" : "hidden" %>
+          <% end %>
+        <% end %>
+        >
+        <p><%= form.label attribute, I18n.t("observation.text.#{attribute}") %></p>
+        <%= form.text_field attribute ,class:"form-control" %>
+        </div>
+        <% if attribute.include?("interrupt") %>
+          </div>
+        <% end %>    
+    <% else %>
+        <% if attribute.include?("interrupt") %>
+          <div class=<%= @display[0].include?(pseudoact.attributes["completion"]) ? "" : "hidden" %>>
+        <% end %>    
+        <% if attribute.include?("completion") %>
+          <p><%= form.label "pseudoact[#{attribute}]", I18n.t("todo.pseudoact")+I18n.t("observation.text.#{attribute}") %></p>
+        <% else %>
+          <p><%= form.label "pseudoact[#{attribute}]", I18n.t("observation.text.#{attribute}") %></p>
+        <% end %>          
+        <%= select_tag "pseudoact[#{attribute}]",options_for_select(I18n.t("observation.#{attribute}").map { |key, labelname| [labelname, key] }, selected: value.present? ? value : 1),onchange:"textDisplaySelect(this,#{@display[index-14]})" %>
+    <% end %>    
+  <% elsif index==21 %>
+      <p><%= form.label "pseudoact[#{attribute}]", I18n.t("observation.text.#{attribute}") %></p>
+      <%= select_tag "pseudoact[#{attribute}]",options_for_select(I18n.t("observation.#{attribute}").map { |key, labelname| [labelname, key] }, selected: value.present? ? value : 1) %>
+  <% end %>
+<% end %>
+
+
+<div>
+  <%= form.submit class: 'btn btn-primary' %>
+</div>

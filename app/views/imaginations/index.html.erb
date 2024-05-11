@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Imaginations</h1>
+
+<div id="imaginations">
+  <% @imaginations.each do |imagination| %>
+    <%= render imagination %>
+    <p>
+      <%= link_to "Show this imagination", imagination %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New imagination", new_imagination_path %>

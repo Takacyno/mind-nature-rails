@@ -1,0 +1,6 @@
+<h1><%=I18n.t("todo.funeventread") %></h1>
+<%= link_to I18n.t("select"), patient_select_funeventread_path(addicdatum_id:@addicdatum.id), class: 'btn btn-primary' %>
+<%= form_with(model: @funeventread,url:
+patient_funeventreads_path(patient_id:@patient.id,addicdatum_id:@addicdatum.id,funeventabstract_id:@funeventabstract.id)) do |form| %>
+<%= render "form", funeventread: @funeventread,form:form %>
+<% end %>

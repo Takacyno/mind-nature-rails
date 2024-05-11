@@ -1,0 +1,20 @@
+
+  <% if funeventabstract.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(funeventabstract.errors.count, "error") %> prohibited this funeventabstract from being saved:</h2>
+
+      <ul>
+        <% funeventabstract.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+      <%= form.label :other, I18n.t("todo.funeventabstract"), style: "display: block" %>
+      <%= form.text_area :abstract ,class:'form-control' %>
+    </div>
+  <div>
+    <%= form.submit class: 'btn btn-primary' %>
+  </div>
+

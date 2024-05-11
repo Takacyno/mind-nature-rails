@@ -1,0 +1,23 @@
+  <% if funeventread.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(funeventread.errors.count, "error") %> prohibited this funeventread from being saved:</h2>
+
+      <ul>
+        <% funeventread.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>
+      <%= @funeventabstract.funeventconcrete.concrete %>
+  </p>
+  <div>
+    <%= form.label :word, Funeventread.human_attribute_name(:word), style: "display: block" %>
+    <% (0..19).each do |index| %>
+      <%= text_field_tag "funeventread[word][]",  funeventread.word.present?&&funeventread.word[index].present? ? funeventread.word[index] : "", class:'form-control' %>
+    <% end %>
+  </div>
+  <div>
+    <%= form.submit class: 'btn btn-primary'%>
+  </div>

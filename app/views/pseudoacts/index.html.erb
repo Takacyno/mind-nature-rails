@@ -1,0 +1,12 @@
+<h1><%= I18n.t("todo.pseudoact")+I18n.t("index") %></h1>
+<%= link_to I18n.t("new"), new_patient_addicdatum_pseudoact_path %>
+<table class="table table-hover">
+    <tbody>
+        <% @pseudoacts.each do |pseudoact| %>
+            <tr>
+                <td><%= I18n.t("observation.completion.#{pseudoact.completion}") %></td>
+                <td><%= link_to pseudoact.created_at,patient_addicdatum_pseudoact_path(id:pseudoact.id) %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

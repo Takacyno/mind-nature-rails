@@ -6,14 +6,7 @@
 <%= render 'user_counsellor',user: @patient.user %>
 <%= render 'patient_counsellor',patient: @patient %>
 <%= render 'patient',patient: @patient %>
-
-<%= form_tag(patient_addicdatum_path(@patient), method: :get) do %>
-  <% Addiction.all.each do |addic| %>
-    <% if @patient.addiction.include?(addic.id)  %>
-      <%= button_tag I18n.t("addiction.#{addic.id}"), name: "button_name", value: addic.id, class: 'btn btn-primary' %>
-    <% end %>
-  <% end %>
-<% end %>
+<%= link_to "症状一覧へ", patient_addicdata_path(@patient), class: 'btn btn-primary' %>
 <br>
 <div>
   <%= link_to "編集", edit_patient_path(@patient), class: 'btn btn-primary' %>

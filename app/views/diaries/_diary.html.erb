@@ -1,0 +1,38 @@
+  <p>
+    <strong><%= I18n.t("activerecord.attributes.diary.starttime") %>:</strong>
+    <%= diary.starttime %>
+  </p>
+
+  <p>
+    <strong><%= I18n.t("activerecord.attributes.diary.endtime") %>:</strong>
+    <%= diary.endtime %>
+  </p>
+
+  <p>
+    <strong><%= I18n.t("activerecord.attributes.diary.place") %>:</strong>
+    <%= diary.place %>
+  </p>
+
+  <p>
+    <strong><%= I18n.t("activerecord.attributes.diary.people") %>:</strong>
+    <%= diary.people %>
+  </p>
+
+  <p>
+    <strong><%= I18n.t("activerecord.attributes.diary.impetus") %>:</strong>
+    <%= diary.impetus %>
+  </p>
+  <% case @addicdatum.what %>
+  <% when 1 %>
+    <p>
+    <strong><%= I18n.t("activerecord.attributes.diary.what") %>:</strong>
+    <%= generate_alcohol_string(diary) %>
+    </p>
+    <p>
+    <strong><%= I18n.t("other") %>:</strong>
+    <%= diary.alcoholdiary.other %>
+    </p>
+  <% end %>
+
+
+

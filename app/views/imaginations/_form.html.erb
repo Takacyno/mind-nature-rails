@@ -1,0 +1,22 @@
+<%= form_with(model: imagination) do |form| %>
+  <% if imagination.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(imagination.errors.count, "error") %> prohibited this imagination from being saved:</h2>
+
+      <ul>
+        <% imagination.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :addicdatum_id, style: "display: block" %>
+    <%= form.text_field :addicdatum_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

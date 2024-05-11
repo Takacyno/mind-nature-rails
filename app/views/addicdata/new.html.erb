@@ -1,0 +1,14 @@
+<h1><%= Patient.human_attribute_name(:addiction) %>データの登録</h1>
+<%= form_with(model: @addicdatum, url: patient_addicdata_path(@patient)) do |form| %>
+  <%= Patient.human_attribute_name(:addiction) %> 
+  <div class:"form-group">
+    <%= form.label :what, Patient.human_attribute_name(:addiction) %>
+    <%= form.select(:what, @newaddiction.map { |key, value| [value, key] }) %>
+  </div>
+  <%= render "form", addicdatum: @addicdatum,form:form %>
+<% end %>
+<br>
+
+<div>
+  <%= link_to "戻る", patient_addicdata_path(@patient), class: 'btn btn-primary' %>
+</div>

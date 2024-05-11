@@ -1,0 +1,18 @@
+<h1><%=I18n.t("todo.funeventconcrete")%></h1>
+
+<table class="table table-hover">
+    <tbody>
+        <% @funeventabstractIncomplete.each do |funeventabstract| %>
+          <tr>
+              <td><%= funeventabstract.abstract %></td>    
+              <td><%= link_to I18n.t("new"), new_patient_funeventabstract_funeventconcrete_path(funeventabstract_id:funeventabstract.id,addicdatum_id:@addicdatum.id) %></td>
+          </tr>
+        <% end %>
+        <% @funeventabstractComplete.each do |funeventabstract| %>
+            <tr>
+                <td><%= funeventabstract.abstract %></td>    
+                <td><%= link_to I18n.t("show"), patient_funeventabstract_funeventconcrete_path(id:funeventabstract.funeventconcrete.id,funeventabstract_id:funeventabstract.id,addicdatum_id:@addicdatum.id) %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
