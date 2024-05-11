@@ -75,10 +75,18 @@ class CounsellorsController < ApplicationController
     
     def counsellor_params
       if current_user.directorflag?
-        if params[:action]=='create'
-          params.require(:user).permit(:name, :email, :counsellorflag,:userstatus,:directorflag,:password,:password_confirmation, counsellor_attributes: [:id,:hospital]).merge(userstatus:1,counsellorflag:1)
-        elsif params[:action]=='update'
-          params.require(:user).permit(:name, :email,:userstatus,:directorflag,counsellor_attributes: [:id,:hospital])
+        if current_user.adminflag?
+          if params[:action]=='create'
+            params.require(:user).permit(:name, :email, :counsellorflag,:userstatus,:directorflag,:adminflag,:password,:password_confirmation, counsellor_attributes: [:id,:hospital]).merge(userstatus:1,counsellorflag:1)
+          elsif params[:action]=='update'
+            params.require(:user).permit(:name, :email,:userstatus,:directorflag,:adminflag,counsellor_attributes: [:id,:hospital])
+          end
+        else
+          if params[:action]=='create'
+            params.require(:user).permit(:name, :email, :counsellorflag,:userstatus,:directorflag,:password,:password_confirmation, counsellor_attributes: [:id,:hospital]).merge(userstatus:1,counsellorflag:1)
+          elsif params[:action]=='update'
+            params.require(:user).permit(:name, :email,:userstatus,:directorflag,counsellor_attributes: [:id,:hospital])
+          end
         end
       else
         params.require(:user).permit(:name, :email, counsellor_attributes: [:id, :hospital])

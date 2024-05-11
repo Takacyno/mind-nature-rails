@@ -29,7 +29,12 @@
       <%= form.label :directorflag, User.human_attribute_name(:directorflag), class: "form-check-label" %>
       <%= form.check_box(:directorflag,class:"form-check-input") %>
     </div>
-
+    <% if current_user.directorflag? %>
+      <div class:"form-check">
+        <%= form.label :adminflag, User.human_attribute_name(:adminflag), class: "form-check-label" %>
+        <%= form.check_box(:adminflag,class:"form-check-input") %>
+      </div>
+    <% end %>
   <% end %>
   <% if calling_view=='new' %>
     <div class:"form-group">
