@@ -4,7 +4,7 @@
     <tbody>
         <% @funeventabstracts.each do |funeventabstract| %>
           <tr>
-              <td><%= funeventabstract.abstract %></td>    
+              <td><%= funeventabstract.abstract %></td>
               <td><%= link_to "読み返す", new_patient_funeventabstract_funeventread_path(funeventabstract_id:funeventabstract.id,addicdatum_id:@addicdatum.id) %></td>
           </tr>
         <% end %>

@@ -1,10 +1,7 @@
-<h1>Editing imagination</h1>
+<h1><%= I18n.t("todo.imagination")+I18n.t("new") %></h1>
+<%= link_to I18n.t("back"), patient_addicdatum_imaginationtext_imagination_path(id:@imagination.id), class: 'btn btn-primary' %>
+<%= form_with(model: @imagination,url:
+patient_addicdatum_imaginationtext_imagination_path(addicdatum_id:@addicdatum.id)) do |form| %>
+  <%= render "form", imagination: @imagination,form:form %>
+<% end %>
 
-<%= render "form", imagination: @imagination %>
-
-<br>
-
-<div>
-  <%= link_to "Show this imagination", @imagination %> |
-  <%= link_to "Back to imaginations", imaginations_path %>
-</div>

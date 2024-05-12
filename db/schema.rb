@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_01_033234) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_11_082136) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -131,6 +131,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_01_033234) do
   end
 
   create_table "imaginations", force: :cascade do |t|
+    t.bigint "imaginationtext_id", null: false
     t.integer "autonomicnervesbefore", default: [], array: true
     t.integer "feelingbefore", default: [], array: true
     t.integer "directionbefore", default: [], array: true
@@ -150,11 +151,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_01_033234) do
     t.string "posttext"
     t.integer "people"
     t.string "peopletext"
-    t.integer "num"
     t.string "word", array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "imaginationtext_id"
     t.index ["imaginationtext_id"], name: "index_imaginations_on_imaginationtext_id"
   end
 

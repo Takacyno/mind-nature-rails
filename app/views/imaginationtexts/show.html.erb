@@ -1,10 +1,7 @@
-<p style="color: green"><%= notice %></p>
-
 <%= render @imaginationtext %>
 
 <div>
-  <%= link_to "Edit this imaginationtext", edit_imaginationtext_path(@imaginationtext) %> |
-  <%= link_to "Back to imaginationtexts", imaginationtexts_path %>
-
-  <%= button_to "Destroy this imaginationtext", @imaginationtext, method: :delete %>
+  <%= link_to I18n.t("todo.imagination"), patient_addicdatum_imaginationtext_imaginations_path(imaginationtext_id:@imaginationtext.id,addicdatum_id:@addicdatum.id) %> 
+  <%= link_to I18n.t("edit"), edit_patient_addicdatum_imaginationtext_path(id:@imaginationtext.id,addicdatum_id:@addicdatum.id) %> 
+  <%= link_to I18n.t("back"), patient_addicdatum_imaginationtexts_path(addicdatum_id:@addicdatum.id) %>
 </div>

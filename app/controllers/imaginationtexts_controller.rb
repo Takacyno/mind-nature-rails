@@ -1,9 +1,11 @@
 class ImaginationtextsController < ApplicationController
-  before_action :set_imaginationtext, only: %i[ show edit update destroy ]
-
+  include SetAddicdatum
+  before_action :set_addicdatum_addic 
+  before_action :set_imaginationtext, only: %i[ edit update show]
+  before_action :set_new_imaginationtext, only: %i[ new create]
   # GET /imaginationtexts or /imaginationtexts.json
   def index
-    @imaginationtexts = Imaginationtext.all
+    @imaginationtexts = @addicdatum.imaginationtexts.all
   end
 
   # GET /imaginationtexts/1 or /imaginationtexts/1.json
@@ -12,7 +14,6 @@ class ImaginationtextsController < ApplicationController
 
   # GET /imaginationtexts/new
   def new
-    @imaginationtext = Imaginationtext.new
   end
 
   # GET /imaginationtexts/1/edit
@@ -21,30 +22,32 @@ class ImaginationtextsController < ApplicationController
 
   # POST /imaginationtexts or /imaginationtexts.json
   def create
-    @imaginationtext = Imaginationtext.new(imaginationtext_params)
+    ActiveRecord::Base.transaction do
+      logger.debug "Params received in addicdatum_params: #{params.inspect}"
 
-    respond_to do |format|
-      if @imaginationtext.save
-        format.html { redirect_to imaginationtext_url(@imaginationtext), notice: "Imaginationtext was successfully created." }
-        format.json { render :show, status: :created, location: @imaginationtext }
+      if @imaginationtext.update(imaginationtext_params)
+        redirect_to patient_addicdatum_imaginationtexts_path, notice: '更新が完了しました'
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @imaginationtext.errors, status: :unprocessable_entity }
+        flash.now[:alert]="更新に失敗しました"
+        raise ActiveRecord::Rollback # ロールバック
+        redirect_to new_patient_addicdatum_imaginationtext_path
       end
-    end
+    end    
   end
 
   # PATCH/PUT /imaginationtexts/1 or /imaginationtexts/1.json
   def update
-    respond_to do |format|
+    ActiveRecord::Base.transaction do
+      logger.debug "Params received in patient_params: #{params.inspect}"
+
       if @imaginationtext.update(imaginationtext_params)
-        format.html { redirect_to imaginationtext_url(@imaginationtext), notice: "Imaginationtext was successfully updated." }
-        format.json { render :show, status: :ok, location: @imaginationtext }
+        redirect_to patient_addicdatum_imaginationtext_path notice: '更新が完了しました'
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @imaginationtext.errors, status: :unprocessable_entity }
+        flash.now[:alert]="更新に失敗しました"
+        raise ActiveRecord::Rollback # ロールバック
+        redirect_to edit_patient_addicdatum_imaginationtext_path
       end
-    end
+    end    
   end
 
   # DELETE /imaginationtexts/1 or /imaginationtexts/1.json
@@ -52,19 +55,25 @@ class ImaginationtextsController < ApplicationController
     @imaginationtext.destroy
 
     respond_to do |format|
-      format.html { redirect_to imaginationtexts_url, notice: "Imaginationtext was successfully destroyed." }
+      format.html { redirect_to imaginationtexts_url, notice: "imaginationtext was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
+
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_new_imaginationtext
+      @imaginationtext = @addicdatum.imaginationtexts.build
+    end
     def set_imaginationtext
-      @imaginationtext = Imaginationtext.find(params[:id])
+      @imaginationtext = @addicdatum.imaginationtexts.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def imaginationtext_params
-      params.require(:imaginationtext).permit(:addicdatum_id)
+      params.require(:imaginationtext).permit(:addicdatum_id,:imaginationtext)
     end
+
 end
+

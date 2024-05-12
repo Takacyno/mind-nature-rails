@@ -96,30 +96,5 @@ class PseudoactsController < ApplicationController
       )
     end
 
-    def alcohol_array
-      @alcohol_amount=[0]
-      @alcohol_unit=[0]
-      @pseudoact.alcoholpseudoact.attributes.each_with_index do |(attribute, value), index|
-        if (1..Alcohol.count).include?(index) 
-          if value.include?(0)
-            value.each do |param|
-              if param>0
-                @alcohol_amount.push(param)
-                break
-              end
-            end
-            value.each do |param|
-              if param<0
-                @alcohol_unit.push(param)
-                break
-              end
-            end
-          else
-            @alcohol_amount.push(1)
-            @alcohol_unit.push(1)
-          end
-        end
-      end
-    end
 end
 

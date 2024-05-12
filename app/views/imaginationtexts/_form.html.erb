@@ -1,22 +1,20 @@
-<%= form_with(model: imaginationtext) do |form| %>
-  <% if imaginationtext.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(imaginationtext.errors.count, "error") %> prohibited this imaginationtext from being saved:</h2>
 
-      <ul>
-        <% imaginationtext.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<% if imaginationtext.errors.any? %>
+<div style="color: red">
+  <h2><%= pluralize(imaginationtext.errors.count, "error") %> prohibited this imaginationtext from being saved:</h2>
 
-  <div>
-    <%= form.label :addicdatum_id, style: "display: block" %>
-    <%= form.text_field :addicdatum_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+  <ul>
+    <% imaginationtext.errors.each do |error| %>
+      <li><%= error.full_message %></li>
+    <% end %>
+  </ul>
+</div>
 <% end %>
+<div class="form-group">
+  <%= form.label :other, I18n.t("todo.imaginationtext"), style: "display: block" %>
+  <%= form.text_area :imaginationtext ,class:'form-control' %>
+</div>
+<div>
+<%= form.submit class: 'btn btn-primary' %>
+</div>
+

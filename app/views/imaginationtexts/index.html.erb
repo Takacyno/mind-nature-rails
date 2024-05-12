@@ -1,14 +1,12 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Imaginationtexts</h1>
-
-<div id="imaginationtexts">
-  <% @imaginationtexts.each do |imaginationtext| %>
-    <%= render imaginationtext %>
-    <p>
-      <%= link_to "Show this imaginationtext", imaginationtext %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New imaginationtext", new_imaginationtext_path %>
+<h1><%= I18n.t("todo.imaginationtext")+I18n.t("index") %></h1>
+<%= link_to I18n.t("new"), new_patient_addicdatum_imaginationtext_path, class: 'btn btn-primary' %>
+<table class="table table-hover">
+    <tbody>
+        <% @imaginationtexts.each do |imaginationtext| %>
+            <tr>
+                <td><%= imaginationtext.imaginationtext %></td>
+                <td><%= link_to I18n.t("select"),patient_addicdatum_imaginationtext_path(id:imaginationtext.id) %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
