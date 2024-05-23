@@ -31,8 +31,6 @@ Rails.application.configure do
   config.assets.compile = false
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  # config/environments/production.rb
-  config.action_controller.asset_host = 'https://mind-nature-7e8355d25a1a.herokuapp.com/'
 
 
   # Specifies the header that your server uses for sending files.
