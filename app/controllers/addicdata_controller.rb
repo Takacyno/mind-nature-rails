@@ -6,6 +6,7 @@ class AddicdataController < ApplicationController
   
   def index
     @addicdata=@patient.addicdata
+    # params[:id]=nill
   end
 
   def show

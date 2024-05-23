@@ -7,13 +7,26 @@
           <%= csp_meta_tag %>
           <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
           <%= javascript_importmap_tags %>
+    <%#= vite_client_tag %>
+    <%#= vite_javascript_tag 'application' %>
+    <!--
+      If using a TypeScript entrypoint file:
+        vite_typescript_tag 'application'
+
+      If using a .jsx or .tsx entrypoint, add the extension:
+        vite_javascript_tag 'application.jsx'
+
+      Visit the guide for more information: https://vite-ruby.netlify.app/guide/rails
+    -->
+
    </head>
    <body>
       <nav class="app-title navbar navbar-expand-md navbar-light bg-light">
 
         <ul class="navbar-nav ml-auto">
-        <% if (request.url.include?("/addicdata/")||request.url.include?("/funevent"))&&!request.url.include?("/addicdata/new") %>
+          <% if (request.url.include?("/addicdata/")||request.url.include?("/funevent"))&&!request.url.include?("/addicdata/new") %>
             <li class="nav-item"><label id="humOpen" for="humCheck"><%= image_tag("bars_24.png") %></label></li>
+            <li class="nav-item"><%= link_to I18n.t("back"), patient_addicdatum_path(id:@addicdatum.id), class: 'nav-link' %> </li>
           <% end %>
           <% if current_user %>
           <li class="nav-item"><%= link_to 'ログアウト', logout_path, class: 'nav-link' %></li>
