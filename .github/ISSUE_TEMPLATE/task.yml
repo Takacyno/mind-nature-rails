@@ -24,7 +24,12 @@ body:
     attributes:
       label: デバイス
       description: PC か、スマホか、はたまたアプリか
-
+      options:
+        - PC
+        - スマホ
+        - PC・スマホ両方
+        - アプリ
+        - その他
   - type: textarea
     id: scope
     attributes:
