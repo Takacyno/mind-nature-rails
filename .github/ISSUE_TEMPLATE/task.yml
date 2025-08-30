@@ -1,0 +1,200 @@
+name: "Task issue"
+description: "Taskレベルのissueをつくる"
+title: "【対象ドメイン】Task内容"
+labels: ["🍎 task"]
+projects: ["tdrk-inc/6"]
+body:
+  - type: textarea
+    id: issue
+    attributes:
+      label: Issue（課題・ニーズ）
+      description: ニーズを書く。課題感、重要性を共有するために書く。
+      placeholder: |
+        例：
+        - ユーザーが作品情報を効率的に管理できていない
+        - 現在の検索機能では目的の作品を見つけるのに時間がかかる
+        - データの整合性に問題があり、運用負荷が高い
+    validations:
+      required: true
+
+  - type: textarea
+    id: user-story
+    attributes:
+      label: ユーザーストーリー
+      description: この機能を利用したユーザーが、どのようなメリットを享受するか。また、エンドユーザー以外の登場人物もすべて網羅する（CS やコンテンツ運用者、分析者等）
+      placeholder: |
+        例：
+        【エンドユーザー】
+        - 作品を簡単に検索・発見できる
+        - お気に入り機能で作品を管理できる
+
+        【コンテンツ運用者】
+        - 作品データを効率的に登録・更新できる
+        - データの品質管理が容易になる
+
+        【CS担当者】
+        - ユーザーからの問い合わせに迅速に対応できる
+    validations:
+      required: true
+
+  - type: dropdown
+    id: device
+    attributes:
+      label: デバイス
+      description: PC か、スマホか、はたまたアプリか
+      options:
+        - PC
+        - スマホ
+        - アプリ
+        - PC・スマホ両対応
+        - その他
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: 影響範囲
+      description: サービス側か、管理画面かなど。URLも書く。
+      placeholder: |
+        例：
+        - サービス側（https://example.com/artworks）
+        - 管理画面（https://admin.example.com/artists）
+        - API（/api/v1/artists）
+    validations:
+      required: true
+
+  - type: textarea
+    id: kpi
+    attributes:
+      label: KPI
+      description: できるだけ定量的に書く。定量化が難しければ定性的に書く。
+      placeholder: |
+        例：
+        【定量的KPI】
+        - 検索成功率を80%→95%に向上
+        - 作品登録時間を30分→10分に短縮
+        - ユーザー満足度を3.2→4.0に向上
+
+        【定性的KPI】
+        - ユーザビリティの改善
+        - 運用効率の向上
+    validations:
+      required: true
+
+  - type: input
+    id: release-date
+    attributes:
+      label: リリース希望日
+      description: 希望なのか、デッドラインなのか、理由も含めて明記
+      placeholder: "例：2024年3月末（決算前のデッドライン）、または 2024年4月（春の機能リリース希望）"
+    validations:
+      required: true
+
+  - type: textarea
+    id: risks
+    attributes:
+      label: リスク
+      description: 認識しているリスクがあれば記載、かつ対処法も記載。※リスクはいくらでもあるので「このリスクは許容する」という合意を得るために記載
+      placeholder: |
+        例：
+        【技術的リスク】
+        - 既存データのマイグレーションに時間がかかる可能性
+        → 対処法：段階的なマイグレーション計画を策定
+
+        【ビジネスリスク】
+        - ユーザーの学習コストが発生
+        → 対処法：チュートリアル機能の実装
+    validations:
+      required: false
+
+  - type: textarea
+    id: stakeholders
+    attributes:
+      label: ステークホルダー
+      description: 要件に対してレビュー/承認してもらう人を明記。開発的なレビューと、それ以外のレビューがあるため、全員を記載する。
+      placeholder: |
+        例：
+        【要件レビュー】
+        - @product-owner（製品要件）
+        - @design-lead（デザインレビュー）
+        - @cs-lead（CS観点）
+
+        【技術レビュー】
+        - @tech-lead（技術レビュー）
+        - @security-team（セキュリティレビュー）
+    validations:
+      required: true
+
+  - type: textarea
+    id: references
+    attributes:
+      label: 参照
+      description: 参考資料，他社事例を書く
+      placeholder: |
+        例：
+        - 競合他社の機能比較資料
+        - ユーザーインタビュー結果
+        - 関連する技術記事
+        - デザインの参考サイト
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ## 〜ここからは開発者がコメントに書く〜
+
+  - type: textarea
+    id: estimation
+    attributes:
+      label: 工数見積もり（開発者記入）
+      description: 開発者が記入する工数見積もり
+      placeholder: |
+        例：
+        - フロントエンド：3人日
+        - バックエンド：5人日
+        - テスト・QA：2人日
+        - 合計：10人日
+    validations:
+      required: false
+
+  - type: input
+    id: planned-release
+    attributes:
+      label: リリース予定日（開発者記入）
+      description: 開発者が記入するリリース予定日
+      placeholder: "例：2024年4月15日"
+    validations:
+      required: false
+
+  - type: textarea
+    id: specifications
+    attributes:
+      label: 仕様（開発者記入）
+      description: 開発者が記入する詳細仕様
+      placeholder: |
+        例：
+        - API仕様
+        - データベース設計
+        - 画面仕様
+        - 技術的制約
+    validations:
+      required: false
+
+  - type: textarea
+    id: tasks
+    attributes:
+      label: タスク（開発者記入）
+      description: 細かいタスクに分解できているなら書き出す
+      placeholder: |
+        例：
+        - [ ] データベーススキーマ設計
+        - [ ] API実装
+        - [ ] フロントエンド画面実装
+        - [ ] テストケース作成
+        - [ ] ドキュメント更新
+      render: markdown
+    validations:
+      required: false
